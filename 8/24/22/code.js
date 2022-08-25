@@ -13,6 +13,16 @@ const pairSum = (numbers, targetSum) => {
     }
     
   };
+  const pairProduct = (numbers, targetProduct) => {
+    // todo
+    const hashmap = {};
+    for(let i = 0; i < numbers.length; i++) {
+      
+      if (hashmap[(Math.floor(targetProduct / numbers[i]))] === undefined) {
+        hashmap[numbers[i]] = i;
+      } else {
+        return [hashmap[(Math.floor(targetProduct / numbers[i]))], i]
+      }
+    }
+    
 
-
-  
