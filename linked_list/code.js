@@ -51,3 +51,26 @@ const getNodeValue = (head, index) => {
     return null
     
 };
+
+const zipperLists = (head1, head2) => {
+    // todo
+    const retHead = head1;
+    let retCurrent = head1;
+    let current1 = head1;
+    let current2 = head2;
+    current1 = current1.next
+    while (current1 || current2) {
+      if (current2) {
+        retCurrent.next = current2;
+        retCurrent = retCurrent.next;
+        current2 = current2.next;
+      }
+      if (current1) {
+        retCurrent.next = current1;
+        retCurrent = retCurrent.next;
+        current1 = current1.next;
+      }
+      console.log(retCurrent)
+    }
+    return retHead;
+};
