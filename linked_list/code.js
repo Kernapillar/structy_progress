@@ -36,3 +36,18 @@ const linkedListFind = (head, target) => {
     }
     return false 
 };
+
+const getNodeValue = (head, index) => {
+    // todo
+    let i = 0;
+    while (head) {
+      if (i === index) {
+        return head.val;
+      } 
+      head = head.next
+      i += 1;
+        
+    }
+    return null
+    
+};
