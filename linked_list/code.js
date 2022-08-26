@@ -25,3 +25,14 @@ const sumList = (head) => {
     return count
 };
   
+
+const linkedListFind = (head, target) => {
+    // todo
+    while (head) {
+      if (head.val === target) {
+        return true
+      }
+      head = head.next;
+    }
+    return false 
+};
