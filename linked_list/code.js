@@ -106,3 +106,15 @@ const mergeLists = (head1, head2) => {
   
   return preNode.next
 };
+
+const isUnivalueList = (head) => {
+  // todo
+  const listVal = head.val;
+  while (head) {
+    if (head.val !== listVal){
+      return false
+    }
+    head = head.next;
+  }
+  return true
+};
