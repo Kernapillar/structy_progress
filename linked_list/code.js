@@ -145,3 +145,21 @@ const longestStreak = (head) => {
   }
    return ((count > curStreak) ? count : curStreak)
 };
+
+const removeNode = (head, targetVal) => {
+  // todo
+  if (head.val === targetVal) {
+    return head.next;
+  }
+  
+  let current = head;
+  while (current.next) {
+    if (current.next.val === targetVal) {
+      current.next = current.next.next;
+      return head
+    }
+    current = current.next
+  }
+  current.next = null; 
+  return head
+};
