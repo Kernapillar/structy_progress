@@ -118,3 +118,30 @@ const isUnivalueList = (head) => {
   }
   return true
 };
+
+const longestStreak = (head) => {
+  // todo
+  let curVal;
+  if (head){
+    curVal = head.val;
+  }
+  
+  let curStreak = 0;
+  let count = 0
+  while (head){
+    if (head.val !== curVal) {
+      if (count > curStreak) {
+        curStreak = count;
+        count = 1;
+        
+      } 
+      curVal = head.val;
+    } else {
+      count += 1;
+    }
+    head = head.next
+    console.log(curVal)
+    console.log(head)
+  }
+   return ((count > curStreak) ? count : curStreak)
+};
