@@ -202,3 +202,36 @@ const createLinkedList = (values) => {
   }
   return head
 };
+
+const addLists = (head1, head2) => {
+  // todo
+  const preHead = new Node();
+  let current = preHead;
+  let carry = 0;
+  while (head1 || head2) {
+    if (head1 === null){
+      head1 = new Node(0);
+    }
+    if (head2 === null){
+      head2 = new Node(0);
+    }
+    if (carry !== 0) {
+      head1.val += 1
+      carry = 0;
+    }
+    let nextNum = head1.val + head2.val;
+    if (nextNum >= 10 ){
+      carry = 1;
+      nextNum = nextNum - 10
+    }
+    current.next = new Node(nextNum);
+    current = current.next;
+    head1 = head1.next;
+    head2 = head2.next;
+    if (!head1 && !head2 && carry) {
+      current.next = new Node(1)
+    }
+  }
+  
+  return preHead.next;
+};
