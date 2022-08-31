@@ -52,6 +52,24 @@ const getNodeValue = (head, index) => {
     
 };
 
+const reverseList = (head) => {
+  // todo
+  if (!head.next) {
+    return head;
+  }
+  let current = head;
+  let prev = null;
+  while (current) {
+    let nextNode = current.next;
+    current.next = prev;
+    prev = current;
+    current = nextNode;
+    
+    
+  }
+  return prev;
+};
+
 const zipperLists = (head1, head2) => {
     // todo
     const retHead = head1;
