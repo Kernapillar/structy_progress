@@ -16,3 +16,21 @@ const depthFirstValues = (root) => {
     }
     return values;
   };
+
+const breadthFirstValues = (root) => {
+    // todo
+    const nodes = [root];
+    const values = [];
+    
+    while (nodes[0]) {
+      let current = nodes.shift();
+      values.push(current.val);
+      if (current.left) {
+        nodes.push(current.left)
+      }
+      if (current.right) {
+        nodes.push(current.right)
+      }
+    }
+    return values
+};
