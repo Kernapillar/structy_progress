@@ -34,3 +34,17 @@ const breadthFirstValues = (root) => {
     }
     return values
 };
+
+const treeSum = (root) => {
+    // todo
+    const nodes = [root];
+    let total = 0;
+    
+    while (nodes[0]) {
+      let current = nodes.shift();
+      total += current.val;
+      if (current.left) nodes.push(current.left);
+      if (current.right) nodes.push(current.right);
+    }
+    return total;
+  };
