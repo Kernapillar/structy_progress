@@ -47,4 +47,20 @@ const treeSum = (root) => {
       if (current.right) nodes.push(current.right);
     }
     return total;
-  };
+};
+
+
+const treeIncludes = (root, target) => {
+    // todo
+    const nodes = [root];
+    while (nodes[0]) {
+      let current = nodes.shift();
+      if (current.val === target) {
+        return true;
+      }
+      if (current.left) nodes.push(current.left);
+      if (current.right) nodes.push(current.right);
+      
+    }
+    return false
+};
