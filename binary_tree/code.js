@@ -64,3 +64,18 @@ const treeIncludes = (root, target) => {
     }
     return false
 };
+
+const treeMinValue = (root) => {
+    // todo
+    const nodes = [root];
+    let lowest = root.val;
+    while (nodes[0]) {
+      let current = nodes.shift();
+      if (current.val <= lowest) {
+        lowest = current.val
+      }
+      if (current.left) nodes.push(current.left);
+      if (current.right) nodes.push(current.right);
+    }
+    return lowest
+};
