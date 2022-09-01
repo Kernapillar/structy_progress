@@ -79,3 +79,28 @@ const treeMinValue = (root) => {
     }
     return lowest
 };
+
+const maxPathSum = (root) => {
+    console.log("RAN WITH ", root.val)
+    // todo
+    const currentVal = root.val;
+    
+    if (!root.left && !root.right) {
+      return currentVal;
+    }
+    if (root.left && root.right) {
+      const left = maxPathSum(root.left);
+      const right = maxPathSum(root.right);
+      if (left > right) {
+        return currentVal + left
+      } else {
+        return currentVal + right
+      }
+    }
+    if (root.left) {
+      return currentVal + maxPathSum(root.left)
+    } else {
+      return currentVal + maxPathSum(root.right)
+    }
+    
+};
