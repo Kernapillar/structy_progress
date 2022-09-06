@@ -182,7 +182,6 @@ const treeValueCountRecursive = (root, target) => {
 const howHigh = (node) => {
   // todo
   if (!node) return -1 
-  let height = 0
   const left = howHigh(node.left);
   const right = howHigh(node.right);
   if (right === -1 && left === -1) {
@@ -194,4 +193,21 @@ const howHigh = (node) => {
     return (1 + right)
   }
   
+};
+
+const bottomRightValue = (root) => {
+  // todo
+  let final = root;
+  const nodes = [root];
+  while (nodes.length !== 0) {
+    let current = nodes.shift();
+    final = current;
+    if (current.left) {
+      nodes.push(current.left);    
+    }
+    if (current.right) {
+      nodes.push(current.right);
+    }
+  } 
+  return final.val
 };
