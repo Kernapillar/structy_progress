@@ -143,3 +143,22 @@ const pathFinder = (root, target) => {
     pathFinder,
   };
   
+const treeValueCount = (root, target) => {
+  // todo
+  let count = 0;
+  if (!root) return count;
+  const nodes = [root];
+  while (nodes.length !== 0) {
+    let current = nodes.shift();
+    if (current.val === target) {
+      count += 1;
+    }
+    if (current.left !== null) {
+      nodes.push(current.left);
+    }
+    if (current.right !== null) {
+      nodes.push(current.right);
+    }
+  }
+  return count
+};
