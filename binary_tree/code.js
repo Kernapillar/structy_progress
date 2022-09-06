@@ -162,3 +162,19 @@ const treeValueCount = (root, target) => {
   }
   return count
 };
+
+const treeValueCount = (root, target) => {
+  // todo
+  let count = 0;
+  if (!root) return count
+  if (root.val === target) {
+    count = 1
+  }
+  if (root.left !== null) {
+    count += treeValueCount(root.left, target)
+  }
+   if (root.right !== null) {
+    count += treeValueCount(root.right, target)
+  }
+  return count;
+};
