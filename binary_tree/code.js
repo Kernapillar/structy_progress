@@ -104,3 +104,42 @@ const maxPathSum = (root) => {
     }
     
 };
+
+const pathFinder = (root, target) => {
+    const result = pathFinderhelper(root, target);
+    if (result) {
+      return result.reverse();
+    }  else {
+      return null
+    }
+    
+  }
+  
+  const pathFinderhelper = (root, target) => {
+    // todo
+    if (root === null) {return null}
+    if (root.val === target) {
+      return [root.val]
+    }
+  
+    if (root.left) {
+      let pathLeft = pathFinderhelper(root.left, target)
+      if (pathLeft !== null) {
+        pathLeft.push(root.val);
+        return pathLeft
+      }
+    }
+    if (root.right) {
+      let pathRight = pathFinderhelper(root.right, target)
+      if (pathRight !== null) {
+        pathRight.push(root.val)
+        return pathRight
+      }
+    }
+    return null
+  };
+  
+  module.exports = {
+    pathFinder,
+  };
+  
