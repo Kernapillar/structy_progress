@@ -211,3 +211,23 @@ const bottomRightValue = (root) => {
   } 
   return final.val
 };
+
+const allTreePaths = (root) => {
+  // todo
+  if (root === null) {return []}
+  if (!root.left && !root.right) {
+    return [[root.val]]
+  }
+  const retArr = [];
+  const leftSub = allTreePaths(root.left);
+  const rightSub = allTreePaths(root.right);
+  for (let subpath of leftSub) {
+    retArr.push([root.val, ...subpath])
+  }
+   for (let subpath of rightSub) {
+    retArr.push([root.val, ...subpath])
+  }
+  
+  
+  return retArr;
+};
