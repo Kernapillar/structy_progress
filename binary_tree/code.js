@@ -231,3 +231,26 @@ const allTreePaths = (root) => {
   
   return retArr;
 };
+
+const treeLevels = (root) => {
+  // todo
+  if (!root) return [];
+  const nodes = [[root, 0]];
+  const levels = [];
+  while (nodes.length) {
+    let current = nodes.shift();
+    if (!levels[current[1]]){
+      let newLevel = [current[0].val];
+      levels[current[1]] = newLevel;
+    } else {
+      levels[current[1]].push(current[0].val)
+    }
+    if (current[0].right) {
+      nodes.unshift([current[0].right, (current[1] + 1)])
+    } 
+    if (current[0].left) {
+      nodes.unshift([current[0].left, (current[1] + 1)])
+    } 
+  }
+  return levels;
+};
