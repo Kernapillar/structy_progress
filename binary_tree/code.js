@@ -279,3 +279,20 @@ const _levelAverages = (root, levels, currentLevel) => {
   _levelAverages(root.left, levels, currentLevel + 1)
   _levelAverages(root.right, levels, currentLevel + 1)
 };
+
+const leafList = (root) => {
+  // todo
+  const levels = [];
+  levelMaker(root, levels)
+  return levels
+};
+
+const levelMaker = (root, levels) => {
+  if (!root) return;
+  if (!root.left && !root.right) {
+    levels.push(root.val)
+  }
+  levelMaker(root.left, levels)
+  levelMaker(root.right, levels)
+}
+
