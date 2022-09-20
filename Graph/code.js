@@ -65,3 +65,27 @@ const compCheck = (node, graph, visited) => {
   }
   
 }
+
+const largestComponent = (graph) => {
+  // todo
+  const visited = [];
+  let largest = 0
+  for (let node in graph) {
+    if (!visited.includes(node)) {
+      let current = compCounter(node, graph, visited);
+      if (current > largest) largest = current;
+    }
+  }
+  return largest;
+ };
+
+const compCounter = (node, graph, visited) => {
+  visited.push(node);
+  let count = 1;
+  for(let neighbor of graph[node]) {
+    if (!visited.includes(neighbor)) {
+      count += compCounter(neighbor, graph, visited)
+    }
+  }
+  return count;
+}
