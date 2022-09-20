@@ -41,3 +41,27 @@ const undirectedPath = (edges, nodeA, nodeB) => {
   }
   return false
 };
+
+const connectedComponentsCount = (graph) => {
+  // todo
+  const visited = [];
+  let count = 0;
+  for (let node of Object.keys(graph)) {
+    if (!visited.includes(parseInt(node))) {
+      compCheck(node, graph, visited);
+      console.log("count, visited", count, visited)
+      count += 1; 
+    }
+  }
+  return count;
+};
+
+const compCheck = (node, graph, visited) => {
+  visited.push(node);
+  for (let neighbor of graph[node]) {
+    if (!visited.includes(neighbor)) {
+      compCheck(neighbor, graph, visited)
+    }
+  }
+  
+}
