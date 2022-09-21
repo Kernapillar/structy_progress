@@ -89,3 +89,30 @@ const compCounter = (node, graph, visited) => {
   }
   return count;
 }
+
+const shortestPath = (edges, nodeA, nodeB) => {
+  const graph = graphGenerator(edges);
+  const queue = [[nodeA, 0]];
+  const visited = [];
+  while (queue.length) {
+    let current = queue.shift();
+    if (current[0] === nodeB) return current[1];
+    visited.push(current);
+    for (let neighbor of graph[current[0]]) {
+      if (!visited.includes(neighbor)) {
+        queue.push([neighbor, current[1] + 1]);
+        visited.push(neighbor);
+      }
+    }
+  }
+  return -1
+};
+
+const graphGenerator = (edgeList) => {
+  const graph = {};
+  for (let pair of edgeList) {
+    graph[pair[0]] ? graph[pair[0]].push(pair[1]) : graph[pair[0]] = [pair[1]]
+    graph[pair[1]] ? graph[pair[1]].push(pair[0]) : graph[pair[1]] = [pair[0]] 
+  }
+  return graph;
+};
