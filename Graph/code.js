@@ -116,3 +116,38 @@ const graphGenerator = (edgeList) => {
   }
   return graph;
 };
+
+const islandCount = (grid) => {
+  let count = 0;
+  const visited = new Set();
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++){
+      if (explore(grid, row, col, visited) === true) {
+        count += 1;
+      }
+        
+    }
+  }
+  return count;
+};
+
+const explore = (grid, row, col, visited) => {
+  const rowInbounds = 0 <= row && row < grid.length;
+  const colInbounds = 0 <= col && col < grid[0].length;
+  if (!rowInbounds || !colInbounds) return false;
+  
+  if (grid[row][col] !== "L") return false;
+  const pos = row + "," + col;
+  if (visited.has(pos)) return false;
+  visited.add(pos);
+  
+    
+  explore(grid, row, col + 1, visited);
+  explore(grid, row, col - 1, visited)
+  explore(grid, row + 1, col, visited)
+  explore(grid, row - 1, col, visited)
+
+    
+  
+  return true; 
+};
