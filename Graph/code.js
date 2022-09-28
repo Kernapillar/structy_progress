@@ -131,7 +131,7 @@ const islandCount = (grid) => {
   return count;
 };
 
-const explore = (grid, row, col, visited) => {
+const explore2 = (grid, row, col, visited) => {
   const rowInbounds = 0 <= row && row < grid.length;
   const colInbounds = 0 <= col && col < grid[0].length;
   if (!rowInbounds || !colInbounds) return false;
@@ -142,10 +142,10 @@ const explore = (grid, row, col, visited) => {
   visited.add(pos);
   
     
-  explore(grid, row, col + 1, visited);
-  explore(grid, row, col - 1, visited)
-  explore(grid, row + 1, col, visited)
-  explore(grid, row - 1, col, visited)
+  explore2(grid, row, col + 1, visited);
+  explore2(grid, row, col - 1, visited)
+  explore2(grid, row + 1, col, visited)
+  explore2(grid, row - 1, col, visited)
 
     
   
@@ -181,4 +181,30 @@ const explore = (grid, r, c, visited) => {
   let left = explore(grid, r, c - 1, visited);
   let right = explore(grid, r, c + 1, visited);
   return 1 + up + down + left + right;
+};
+
+const closestCarrot = (grid, startRow, startCol) => {
+  const visited = new Set();
+  let queue = [[startRow, startCol, 0]]; 
+ 
+  while (queue.length) {
+    let [r, c, steps] = queue.shift();
+    if (grid[r][c] === "C") return steps;
+    let pos = r + "," + c;
+    visited.add(pos);
+     const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+    for (let dir of directions){
+      let newR = r + dir[0];
+      let newC = c + dir[1];
+      
+      if (0 <=newR && newR < grid.length && 0 <=newC && newC < grid[0].length){
+        if (!visited.has(newR + "," + newC) && grid[newR][newC] !== "X"){
+          queue.push([newR, newC, steps + 1])
+          visited.add(newR + "," + newC)
+        }
+      }
+    }
+  }
+  // console.log(visited)
+  return -1;
 };
