@@ -151,3 +151,34 @@ const explore = (grid, row, col, visited) => {
   
   return true; 
 };
+
+const minimumIsland = (grid) => {
+  const islands = [];
+  const visited = new Set();
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++ ){
+      if (grid[r][c] === "L") {
+        let size = explore(grid, r, c, visited)
+        if (size) {
+          islands.push(size)  
+        }
+        
+      }
+    }
+  }
+  return Math.min(...islands);
+};
+
+const explore = (grid, r, c, visited) => {
+  if (r >= grid.length || r < 0) return 0;
+  if (c >= grid[0].length || c < 0) return 0;
+  if (grid[r][c] === "W") return 0;
+  const pos = r + "," + c; 
+  if (visited.has(pos)) return 0;
+  visited.add(pos);
+  let up = explore(grid, r - 1, c, visited);
+  let down = explore(grid, r + 1, c, visited);
+  let left = explore(grid, r, c - 1, visited);
+  let right = explore(grid, r, c + 1, visited);
+  return 1 + up + down + left + right;
+};
