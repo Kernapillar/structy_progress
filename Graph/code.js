@@ -208,3 +208,28 @@ const closestCarrot = (grid, startRow, startCol) => {
   // console.log(visited)
   return -1;
 };
+
+const longestPath = (graph) => {
+  const distance = {};
+  for (let node in graph) {
+    if (graph[node].length === 0) {
+      distance[node] = 0;
+    }
+  }
+  
+  for (let node in graph) {
+    pathExpand(graph, node, distance);
+  }
+  return Math.max(...Object.values(distance));
+};
+
+const pathExpand = (graph, node, distance) =>{
+  if (node in distance) return distance[node];
+  let longest = 0;
+  for (let neighbor of graph[node]) {
+    let current = pathExpand(graph, neighbor, distance)
+    if (current > longest) longest = current; 
+  }
+  distance[node] = 1 + longest 
+  return distance[node]
+};
