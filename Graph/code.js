@@ -233,3 +233,39 @@ const pathExpand = (graph, node, distance) =>{
   distance[node] = 1 + longest 
   return distance[node]
 };
+
+
+const semestersRequired = (numCourses, prereqs) => {
+  const prereqGraph = {};
+  if (prereqs.length === 0) return 1;
+  for (let courses of prereqs) {
+    let [a, b] = courses;
+    if (!prereqGraph[b]) prereqGraph[b] = [];
+    if (!prereqGraph[a]) {
+      prereqGraph[a] = [b]
+    } else {
+      prereqGraph[a].push(b);
+    }
+  }
+  const paths = {};
+  
+  for (let course in prereqGraph) {
+    if (prereqGraph[course].length === 0) paths[course] = 1
+  }
+  for (let course in prereqGraph) {
+    pathExplore(prereqGraph, course, paths);
+  }
+  return Math.max(...Object.values(paths))
+};
+
+const pathExplore = (graph, course, paths) => {
+  if (course in paths) return paths[course];
+  let longest = 0;
+  for (let postReq of graph[course]) {
+    let current = pathExplore(graph, postReq, paths);
+    if (current > longest) longest = current;
+  }
+  paths[course] = longest + 1;
+  return paths[course];
+  
+};
