@@ -40,3 +40,26 @@ const sumPossible = (amount, numbers, memo = {}) => {
     memo[amount] = false
     return false;
 };
+
+
+const minChange = (amount, coins) => {
+    let result = minChanger(amount, coins);
+    if (result === Infinity) return -1; 
+    return result;
+  }
+  
+  
+  const minChanger = (amount, coins, memo = {}) => {
+    // todo
+    if (amount === 0 ) return 0; 
+    if (amount < 0) return Infinity;
+    if (amount in memo) return memo[amount];
+    
+    let best = Infinity;
+    for (let coin of coins){
+      let current = 1 + minChanger(amount - coin, coins, memo);
+      best = Math.min(best, current)
+    }
+    
+    return memo[amount] = best;
+};
