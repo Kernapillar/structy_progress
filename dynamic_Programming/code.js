@@ -11,3 +11,14 @@ const fib = (n, memory = {}) => {
     memory[n] = result;
     return result;
   };
+
+
+const tribonacci = (n, memory = {}) => {
+    // todo
+    if (n <= 1) return 0;
+    if (n === 2 ) return 1;
+    if (memory[n]) return memory[n];
+    const current = tribonacci(n - 1, memory) + tribonacci(n - 2, memory) + tribonacci(n - 3, memory);
+    memory[n] = current;
+    return current
+};
