@@ -63,3 +63,25 @@ const minChange = (amount, coins) => {
     
     return memo[amount] = best;
 };
+
+const maxPathSum = (grid) => {
+  // todo
+  let memo = {};
+  return bestPath(grid, memo, 0, 0);
+};
+
+const bestPath = (grid, memo, row, col) => {
+  if (`${row},${col}` in memo) return memo[`${row},${col}`];
+  if (row === grid.length - 1 && col === grid[0].length - 1) return grid[row][col];
+  let validDirs = [];
+  if (row !== grid.length - 1) {
+    validDirs.push(bestPath(grid, memo, row + 1, col));
+  }
+  if (col !== grid[0].length - 1) {
+    validDirs.push(bestPath(grid, memo, row, col + 1));
+  }
+  let bestDir = Math.max(...validDirs);
+  memo[`${row},${col}`] = bestDir + grid[row][col];
+  return memo[`${row},${col}`];
+  
+};
