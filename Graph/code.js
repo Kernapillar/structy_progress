@@ -270,3 +270,58 @@ const pathExplore = (graph, course, paths) => {
   
 };
 
+
+const bestBridge = (grid) => {
+  let firstIsland
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      const potentialIsland = explore(grid, r, c, new Set());
+      if (potentialIsland.size > 0 ) {
+        firstIsland = potentialIsland; 
+        break;
+      }
+    }
+  }
+  const visited = new Set(firstIsland);
+  const queue = [];
+  for (let pos of visited) {
+    let arr = pos.split(',').map(Number);
+    queue.push([arr[0], arr[1], 0]);
+  };
+  
+  while (queue.length !== 0) {
+    let [row, col, distance] = queue.shift(); 
+    const pos = `${row},${col}`;
+    if (grid[row][col] === "L" && !firstIsland.has(pos)) return distance - 1; 
+    
+    const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+    for (let dir of dirs) {
+      const newRow = row + dir[0];
+      const newCol = col + dir[1];
+      const newPos = `${newRow},${newCol}`;
+      if (inbounds(grid, newRow, newCol) && !visited.has(newPos)) {
+        visited.add(newPos);
+        queue.push([newRow, newCol, distance + 1]);
+      }
+    }
+  };
+  
+};
+
+const inbounds = (grid, row, col) => {
+  if (row < 0 || row >=grid.length) return false; 
+  if (col < 0 || col >= grid[0].length) return false; 
+  return true; 
+};
+
+const explore = (grid, row, col, visited) => {
+  if (!inbounds(grid, row, col) || visited.has(`${row},${col}`) || grid[row][col] === "W") return visited; 
+  visited.add(`${row},${col}`);
+  const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+  for (dir of dirs) {
+    let newR = row + dir[0];
+    let newC = col + dir[1];
+    explore(grid, newR, newC, visited)
+  };
+  return visited
+};
