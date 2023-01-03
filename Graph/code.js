@@ -169,7 +169,7 @@ const minimumIsland = (grid) => {
   return Math.min(...islands);
 };
 
-const explore = (grid, r, c, visited) => {
+const explore3 = (grid, r, c, visited) => {
   if (r >= grid.length || r < 0) return 0;
   if (c >= grid[0].length || c < 0) return 0;
   if (grid[r][c] === "W") return 0;
@@ -324,4 +324,28 @@ const explore = (grid, row, col, visited) => {
     explore(grid, newR, newC, visited)
   };
   return visited
+};
+
+
+
+const hasCycle = (graph) => {
+  const visited = new Set();
+  for (let node in graph) {
+    if (explore(node, graph, new Set(), visited)) {
+      return true
+    }
+  }
+  return false; 
+};
+
+const explore4 = (node, graph, memo, visited) => {
+  if (visited.has(`${node}`)) return false; 
+  if (memo.has(`${node}`)) return true;
+  memo.add(`${node}`);
+  
+  for (let neighbor of graph[node]) {
+    if (explore(neighbor, graph, memo, visited) === true) return true; 
+  }
+  visited.add(`${node}`)
+  return false; 
 };
